@@ -1,6 +1,6 @@
 Package: dataPkgBuild
 Title: What the Package Does (One Line, Title Case)
-Version: 2019.01.04
+Version: 1.0.0
 Authors@R: person(given = "First", family = "Last", role = c("aut",
         "cre"), email = "first.last@example.com")
 Description: What the package does (one paragraph).
