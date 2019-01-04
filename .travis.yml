@@ -14,4 +14,4 @@ deploy:
   github_token: $GITHUB_PAT
   on:
     branch: master
-  target-branch: master
+  target-branch: gh-pages
