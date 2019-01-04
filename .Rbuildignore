@@ -1,0 +1,4 @@
+^\.travis\.yml$
+^dataPkgBuild\.Rproj$
+^\.Rproj\.user$
+^docs
