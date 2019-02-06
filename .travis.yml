@@ -1,17 +1,17 @@
 language: R
 sudo: false
 script:
- - | Rscript -e "d <- read.dcf('DESCRIPTION')"
-         -e "d[1,3] <- gsub('-', '.', Sys.Date())"
-         -e "write.dcf(d, 'DESCRIPTION')" |
+ - Rscript -e "d <- read.dcf('DESCRIPTION')"
+ - Rscript -e "d[1,3] <- gsub('-', '.', Sys.Date())"
+ - Rscript -e "write.dcf(d, 'DESCRIPTION')"
  - R CMD build .
  - R CMD check *tar.gz
 cache: packages
 after_success:
- - | Rscript -e "install.packages('drat')"
-         -e "date <- gsub('-', '.', Sys.Date())"
-         -e "pkg <- paste0('dataPkgBuild_', date, '.tar.gz')"
-         -e "drat::insertPackage(pkg, repodir = 'docs')"|
+ - Rscript -e "install.packages('drat')"
+ - Rscript -e "date <- gsub('-', '.', Sys.Date())"
+ - Rscript -e "pkg <- paste0('dataPkgBuild_', date, '.tar.gz')"
+ - Rscript -e "drat::insertPackage(pkg, repodir = 'docs')"
 deploy:
   provider: pages
   skip_cleanup: true
