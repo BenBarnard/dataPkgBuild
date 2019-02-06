@@ -10,7 +10,7 @@ script:
 cache: packages
 after_success:
  - |
- Rscript -e "install.packages('drat')""
+ Rscript -e "install.packages('drat')"
          -e "date <- gsub('-', '.', Sys.Date())"
          -e "pkg <- paste0('dataPkgBuild_', date, '.tar.gz')"
          -e "drat::insertPackage(pkg, repodir = 'docs')"|
