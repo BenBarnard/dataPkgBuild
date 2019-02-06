@@ -8,9 +8,9 @@ script:
  - R CMD check *tar.gz
 cache: packages
 after_success:
- - Rscript -e "install.packages('drat') \
-               drat::insertPackage(paste0('dataPkgBuild_', \
-               gsub('-', '.', Sys.Date()), '.tar.gz'), repodir = 'docs')"
+ - "Rscript -e 'install.packages('drat')
+               drat::insertPackage(paste0('dataPkgBuild_',
+               gsub('-', '.', Sys.Date()), '.tar.gz'), repodir = 'docs')'"
 deploy:
   provider: pages
   skip_cleanup: true
