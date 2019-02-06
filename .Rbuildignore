@@ -2,3 +2,5 @@
 ^dataPkgBuild\.Rproj$
 ^\.Rproj\.user$
 ^docs
+drat_deploy.R
+version_change.R
