@@ -9,11 +9,13 @@
 #'   ...
 #' }
 #'
-#' @importFrom DBI dbconnect
-#' @importFrom nycflghts flights
+#' @import nycflights13
+#' @importFrom DBI dbConnect
 #' @importFrom dplyr tbl collect summarise group_by copy_to
 #' @importFrom RSQLite SQLite
 #' @importFrom usethis use_data
+#'
+#'
 #'
 "flights_sqldb_df"
 
@@ -35,4 +37,4 @@ flights_sqldb_df <- collect(summarise(group_by(flights_db, dest),
                                       delay = mean(dep_time, na.rm = TRUE)))
 
 
-usethis::use_data(flights_sqldb_df)
+usethis::use_data(flights_sqldb_df, overwrite = TRUE)

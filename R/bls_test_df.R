@@ -2,14 +2,9 @@
 #'
 #' A dataset from bls API
 #'
-#' @format A data frame with 10 variables:
-#' \describe{
-#'   \item{seriesID}{SOme info}
-#'   \item{year}{I guess its a year}
-#'   ...
-#' }
 #' @source \url{https://www.bls.gov}
 #'
+#' @import dbplyr
 #' @importFrom usethis use_data
 #' @importFrom httr POST content_type_json
 #' @importFrom rjson fromJSON toJSON
@@ -45,4 +40,4 @@ bls_test_df <- map_dfr(json$Results$series, function(x){
   )
 })
 
-usethis::use_data(bls_test_df)
+usethis::use_data(bls_test_df, overwrite = TRUE)
