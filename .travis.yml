@@ -2,6 +2,7 @@ language: R
 sudo: false
 script:
  - Rscript version_change.R
+ - Rscript data_build.R
  - R CMD build .
  - R CMD check *tar.gz
 cache: packages
