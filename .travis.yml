@@ -16,3 +16,8 @@ deploy:
     branch: master
   local-dir: docs
   target-branch: gh-pages
+notifications:
+  email:
+    - ben_barnard@outlook.com
+  on_success: always
+  on_failure: always
