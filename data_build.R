@@ -70,4 +70,4 @@ flights_sqldb_df <- collect(summarise(group_by(flights_db, dest),
 
 usethis::use_data(flights_sqldb_df, overwrite = TRUE)
 
-save(flights_sqldb_df, file = "inst/flightsApp/flights.rda")
+save(flights_sqldb_df, file = "inst/flightsApp/data/flights.rda")

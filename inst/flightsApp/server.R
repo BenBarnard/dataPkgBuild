@@ -1,4 +1,4 @@
-load("flights_sqldb_df.rda")
+load("data/flights.rda")
 
 shinyServer(
   function(input, output) {
