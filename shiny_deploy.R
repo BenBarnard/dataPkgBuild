@@ -1,7 +1,4 @@
-options(repos = c("MyRepo"="https://benbarnard.github.io/dataPkgBuild",
-                  "CRAN"="https://cran.rstudio.org"))
-
-install.packages(c('rsconnect', 'shiny', "dataPkgBuild"))
+install.packages(c('rsconnect', 'shiny'))
 
 rsconnect::setAccountInfo(name='ben-barnard',
                           token=Sys.getenv("shiny_token"),

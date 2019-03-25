@@ -65,7 +65,6 @@ script:
  - Rscript version_change.R
  - Rscript data_build.R
  - R CMD build .
- - R CMD INSTALL -l . --build .
  - R CMD check *tar.gz
 cache: packages
 after_success:
@@ -195,6 +194,8 @@ flights_sqldb_df <- collect(summarise(group_by(flights_db, dest),
                                                    na.rm = TRUE)))
 
 use_data(flights_sqldb_df, overwrite = TRUE)
+
+save(flights_sqldb_df, file = "inst/flightsApp/data/flights.rda")
 ```
 
 
@@ -205,9 +206,7 @@ use_data(flights_sqldb_df, overwrite = TRUE)
 install.packages('drat')
 date <- gsub('-', '.', Sys.Date())
 pkg <- paste0('dataPkgBuild_', date, '.tar.gz')
-binary <- paste0('dataPkgBuild_', date, '.zip')
 drat::insertPackage(pkg, repodir = 'docs')
-drat::insertPackage(binary, repodir = 'docs')
 ```
 
 ---
@@ -268,7 +267,7 @@ Shiny is an R package that makes it easy to build interactive web apps straight 
 ## [server.R](https://github.com/BenBarnard/dataPkgBuild/inst/server.R)
 
 ```{r}
-library("dataPkgBuild")
+load("data/flights_sqldb_df.rda")
 
 shinyServer(
   function(input, output) {
@@ -327,10 +326,7 @@ shinyUI(
 ## [shiny_deploy.R](https://github.com/BenBarnard/dataPkgBuild/blob/master/shiny_deploy.R)
 
 ```{r}
-options(repos = c("MyRepo"="https://benbarnard.github.io/dataPkgBuild",
-                  "CRAN"="https://cran.rstudio.org"))
-
-install.packages(c('rsconnect', 'shiny', "dataPkgBuild"))
+install.packages(c('rsconnect', 'shiny'))
 
 rsconnect::setAccountInfo(name='ben-barnard',
                           token=Sys.getenv("shiny_token"),
@@ -339,6 +335,7 @@ library(rsconnect)
 rsconnect::deployApp('inst/flightsApp',
                      forceUpdate = TRUE,
                      launch.browser = FALSE)
+
 ```
 
 ---

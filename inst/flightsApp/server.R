@@ -1,4 +1,4 @@
-library("dataPkgBuild")
+load("data/flights_sqldb_df.rda")
 
 shinyServer(
   function(input, output) {
