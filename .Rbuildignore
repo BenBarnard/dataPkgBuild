@@ -5,3 +5,6 @@
 drat_deploy.R
 version_change.R
 data_build.R
+shiny_deploy.R
+web_deploy.R
+^presentation

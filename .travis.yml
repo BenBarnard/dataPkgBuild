@@ -7,7 +7,9 @@ script:
  - R CMD check *tar.gz
 cache: packages
 after_success:
+ - Rscript web_deploy.R
  - Rscript drat_deploy.R
+ - Rscript shiny_deploy.R
 deploy:
   provider: pages
   skip_cleanup: true
