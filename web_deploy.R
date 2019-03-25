@@ -1,4 +1,4 @@
-install.packages(c("rmarkdown", "knitr", "xarigan"))
+install.packages(c("rmarkdown", "knitr", "xaringan"))
 
 rmarkdown::render(input = "presentation/index.Rmd", output_dir = "docs")
 

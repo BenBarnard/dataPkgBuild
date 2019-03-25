@@ -1,5 +1,5 @@
 devtools::install_github('BenBarnard/dataPkgBuild')
-install.packages('rsconnect')
+install.packages(c('rsconnect', 'shiny'))
 
 rsconnect::setAccountInfo(name='ben-barnard',
                           token=Sys.getenv("shiny_token"),
