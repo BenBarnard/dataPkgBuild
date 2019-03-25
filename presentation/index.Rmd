@@ -195,7 +195,7 @@ flights_sqldb_df <- collect(summarise(group_by(flights_db, dest),
 
 use_data(flights_sqldb_df, overwrite = TRUE)
 
-save(flights_sqldb_df, file = "inst/flightsApp/data/flights.rda")
+save(flights_sqldb_df, file = "inst/flightsApp/flights.rda")
 ```
 
 
@@ -267,7 +267,7 @@ Shiny is an R package that makes it easy to build interactive web apps straight 
 ## [server.R](https://github.com/BenBarnard/dataPkgBuild/inst/server.R)
 
 ```{r}
-load("data/flights_sqldb_df.rda")
+load("flights_sqldb_df.rda")
 
 shinyServer(
   function(input, output) {
