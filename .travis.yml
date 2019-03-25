@@ -4,6 +4,7 @@ script:
  - Rscript version_change.R
  - Rscript data_build.R
  - R CMD build .
+ - R CMD INSTALL -l . --build .
  - R CMD check *tar.gz
 cache: packages
 after_success:
