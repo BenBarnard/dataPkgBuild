@@ -1,5 +1,7 @@
-devtools::install_github('BenBarnard/dataPkgBuild')
-install.packages(c('rsconnect', 'shiny'))
+options(repos = c("MyRepo"="https://benbarnard.github.io/dataPkgBuild",
+                  "CRAN"="https://cran.rstudio.org"))
+
+install.packages(c('rsconnect', 'shiny', "dataPkgBuild"))
 
 rsconnect::setAccountInfo(name='ben-barnard',
                           token=Sys.getenv("shiny_token"),

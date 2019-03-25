@@ -65,10 +65,13 @@ script:
  - Rscript version_change.R
  - Rscript data_build.R
  - R CMD build .
+ - R CMD INSTALL -l . --build .
  - R CMD check *tar.gz
 cache: packages
 after_success:
+ - Rscript web_deploy.R
  - Rscript drat_deploy.R
+ - Rscript shiny_deploy.R
 deploy:
   provider: pages
   skip_cleanup: true
@@ -77,6 +80,11 @@ deploy:
     branch: master
   local-dir: docs
   target-branch: gh-pages
+notifications:
+  email:
+    - ben_barnard@outlook.com
+  on_success: always
+  on_failure: always
 ```
 
 ---
@@ -197,18 +205,15 @@ use_data(flights_sqldb_df, overwrite = TRUE)
 install.packages('drat')
 date <- gsub('-', '.', Sys.Date())
 pkg <- paste0('dataPkgBuild_', date, '.tar.gz')
+binary <- paste0('dataPkgBuild_', date, '.zip')
 drat::insertPackage(pkg, repodir = 'docs')
+drat::insertPackage(binary, repodir = 'docs')
 ```
 
 ---
 ## [.Rbuildignore](https://github.com/BenBarnard/dataPkgBuild/blob/master/.Rbuildignore)
 
 I really don't want any annoying messages. The .Rbuildignore should include the directory and files:
-
-- docs
-- version_change.R
-- data_build.R, and 
-- deploy_drat.R.
 
 ```{.Rbuildignore}
 ^\.travis\.yml$
@@ -218,6 +223,9 @@ I really don't want any annoying messages. The .Rbuildignore should include the 
 drat_deploy.R
 version_change.R
 data_build.R
+shiny_deploy.R
+web_deploy.R
+^presentation
 ```
 
 ---
@@ -260,7 +268,7 @@ Shiny is an R package that makes it easy to build interactive web apps straight 
 ## [server.R](https://github.com/BenBarnard/dataPkgBuild/inst/server.R)
 
 ```{r}
-library(dataPkgBuild)
+library("dataPkgBuild")
 
 shinyServer(
   function(input, output) {
@@ -282,11 +290,7 @@ shinyServer(
                         adjust = input$bw_adjust,
                         na.rm = TRUE)
         lines(dens, col = "blue")
-      }
-
-    })
-  }
-)
+      }})})
 ```
 
 ---
@@ -311,15 +315,11 @@ shinyUI(
 
     plotOutput(outputId = "main_plot", height = "300px"),
 
-    # Display this only if the density is shown
     conditionalPanel(condition = "input.density == true",
                      sliderInput(inputId = "bw_adjust",
                                  label = "Bandwidth adjustment:",
                                  min = 0.2, max = 2, value = 1, step = 0.2)
-    )
-
-  )
-)
+    )))
 
 ```
 
@@ -327,8 +327,10 @@ shinyUI(
 ## [shiny_deploy.R](https://github.com/BenBarnard/dataPkgBuild/blob/master/shiny_deploy.R)
 
 ```{r}
-devtools::install_github('BenBarnard/dataPkgBuild')
-install.packages(c('rsconnect', 'shiny'))
+options(repos = c("MyRepo"="https://benbarnard.github.io/dataPkgBuild",
+                  "CRAN"="https://cran.rstudio.org"))
+
+install.packages(c('rsconnect', 'shiny', "dataPkgBuild"))
 
 rsconnect::setAccountInfo(name='ben-barnard',
                           token=Sys.getenv("shiny_token"),

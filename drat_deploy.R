@@ -1,4 +1,6 @@
 install.packages('drat')
 date <- gsub('-', '.', Sys.Date())
 pkg <- paste0('dataPkgBuild_', date, '.tar.gz')
+binary <- paste0('dataPkgBuild_', date, '.zip')
 drat::insertPackage(pkg, repodir = 'docs')
+drat::insertPackage(binary, repodir = 'docs')

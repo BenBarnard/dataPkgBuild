@@ -1,4 +1,4 @@
-library(dataPkgBuild)
+library("dataPkgBuild")
 
 shinyServer(
   function(input, output) {
