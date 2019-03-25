@@ -328,7 +328,7 @@ shinyUI(
 
 ```{r}
 devtools::install_github('BenBarnard/dataPkgBuild')
-install.packages('rsconnect')
+install.packages(c('rsconnect', 'shiny'))
 
 rsconnect::setAccountInfo(name='ben-barnard',
                           token=Sys.getenv("shiny_token"),
@@ -352,10 +352,17 @@ knitr::include_graphics("github_pat.png")
 ## [web_deploy.R](https://github.com/BenBarnard/dataPkgBuild/blob/master/web_deploy.R)
 
 ```{r}
-install.packages(c("rmarkdown", "knitr", "xarigan"))
+install.packages(c("rmarkdown", "knitr", "xaringan"))
 
-rmarkdown::render(input = "presentation/index.Rmd",
-                  output_dir = "docs")
+rmarkdown::render(input = "presentation/index.Rmd", output_dir = "docs")
+
+imgs <- list.files("presentation", pattern = ".*\\.((png)|(jpg))")
+
+lapply(imgs, function(x){
+  file.copy(from = paste0("presentation/", x),
+            to = paste0("docs/", x))
+})
+
 ```
 
 
@@ -365,12 +372,13 @@ rmarkdown::render(input = "presentation/index.Rmd",
 - [Jenkins](https://jenkins.io/doc/)
 - [ansible](https://www.ansible.com/overview/how-ansible-works)
 - [Docker](https://www.docker.com/resources/what-container)
+- [testhat](https://testthat.r-lib.org/)
 
 ---
 ## 
 
 ```{r, echo = FALSE, eval = TRUE, out.width = '50%', fig.align = 'center'}
-knitr::include_graphics("IMG_0378.JPG")
+knitr::include_graphics("IMG_0378.jpg")
 ```
 
 
