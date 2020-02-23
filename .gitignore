@@ -3,3 +3,6 @@
 .RData
 .Ruserdata
 inst/doc
+dataPkgBuild.Rcheck/
+dataPkgBuild*.tar.gz
+dataPkgBuild*.tgz

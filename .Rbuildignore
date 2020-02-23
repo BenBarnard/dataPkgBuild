@@ -8,3 +8,6 @@ data_build.R
 shiny_deploy.R
 web_deploy.R
 ^presentation
+^dataPkgBuild\.Rcheck$
+^dataPkgBuild.*\.tar\.gz$
+^dataPkgBuild.*\.tgz$
