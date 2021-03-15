@@ -1,0 +1,7 @@
+Package: dataPkgBuild
+Version: 2021.03.15
+Depends: R (>= 3.5.0)
+Suggests: knitr, rmarkdown
+License: GPL-3
+MD5sum: 86c1d8e94c3dce3f10b1f24045d2a189
+NeedsCompilation: no
